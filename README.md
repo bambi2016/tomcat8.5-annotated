@@ -1,8 +1,12 @@
 # tomcat8.5-annotated
-使用说明：</br>
-1:下载到本地</br>
-2:导入到idea</br>
-3:edit configurations-> </br>
+使用说明：
+
+1:下载到本地
+
+2:导入到idea
+
+3:edit configurations-> 
+
 VM options的值填：
 
     -Dcatalina.home=catalina-home
@@ -11,6 +15,10 @@ VM options的值填：
     -Djava.io.tmpdir=catalina-home/temp
     -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
     -Djava.util.logging.config.file=catalina-home/conf/logging.properties
+
+4:启动org.apache.catalina.startup.Bootstrap类
+
+5:访问localhost:8080
 
 ## Welcome to Apache Tomcat!
 
