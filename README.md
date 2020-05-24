@@ -1,3 +1,17 @@
+# tomcat8.5-annotated
+使用说明：</br>
+1:下载到本地</br>
+2:导入到idea</br>
+3:edit configurations-> </br>
+VM options的值填：
+
+    -Dcatalina.home=catalina-home
+    -Dcatalina.base=catalina-home
+    -Djava.endorsed.dirs=catalina-home/endorsed
+    -Djava.io.tmpdir=catalina-home/temp
+    -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+    -Djava.util.logging.config.file=catalina-home/conf/logging.properties
+
 ## Welcome to Apache Tomcat!
 
 ### What Is It?
@@ -77,4 +91,4 @@ instructions for reporting a bug
 ### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
-# tomcat8.5-annotated
+
