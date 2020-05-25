@@ -19,6 +19,8 @@ VM options的值填：
 4:启动org.apache.catalina.startup.Bootstrap类
 
 5:访问localhost:8080
+![图片](https://github.com/bambi2016/tomcat8.5-annotated/blob/master/image/1590418999326.jpg)
+
 
     <?xml version="1.0" encoding="UTF-8"?>
 
@@ -38,11 +40,14 @@ VM options的值填：
       </GlobalNamingResources>
 
       <Service name="Catalina">
-        <!--一个service可以有多个Connector-->
+        <!--一个service可以有多个Connector  protected Connector connectors[] = new Connector[0];-->
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="8443" />
-    <!--一个service只能有一个Engine-->
+        <Connector port="8081" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="8443" />
+    <!--###一个service只能有一个Engine###-->
     <Engine name="Catalina" defaultHost="localhost">
       <Realm className="org.apache.catalina.realm.LockOutRealm">
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
