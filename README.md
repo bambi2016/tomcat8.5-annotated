@@ -44,6 +44,9 @@ VM options的值填：
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="8443" />
+        <Connector port="8081" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="8443" />
     <!--###一个service只能有一个Engine###-->
     <Engine name="Catalina" defaultHost="localhost">
       <Realm className="org.apache.catalina.realm.LockOutRealm">
