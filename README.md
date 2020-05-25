@@ -19,6 +19,8 @@ VM options的值填：
 4:启动org.apache.catalina.startup.Bootstrap类
 
 5:访问localhost:8080
+![图片](https://github.com/bambi2016/tomcat8.5-annotated/blob/master/image/1590418999326.jpg)
+
 
     <?xml version="1.0" encoding="UTF-8"?>
 
