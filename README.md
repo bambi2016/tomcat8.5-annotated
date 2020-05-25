@@ -20,6 +20,8 @@ VM options的值填：
 
 5:访问localhost:8080
 
+可以认为一个war包就是一个host
+
 ## Welcome to Apache Tomcat!
 
 ### What Is It?
