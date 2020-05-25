@@ -20,8 +20,12 @@ VM options的值填：
 
 5:访问localhost:8080
 
-webapps就是一个host
+一个engine可以包含多个host，
 
+webapps就是一个host，
+
+一个war包就是一个context
+一个host可以包含多个context
 ## Welcome to Apache Tomcat!
 
 ### What Is It?
