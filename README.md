@@ -20,12 +20,54 @@ VM options的值填：
 
 5:访问localhost:8080
 
-一个engine可以包含多个host，
+    <?xml version="1.0" encoding="UTF-8"?>
 
-webapps就是一个host，
+    <Server port="8005" shutdown="SHUTDOWN">
+      <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+      <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+      <!-- Prevent memory leaks due to use of particular java/javax APIs-->
+      <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+      <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+      <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+      <GlobalNamingResources>
+        <Resource name="UserDatabase" auth="Container"
+                  type="org.apache.catalina.UserDatabase"
+                  description="User database that can be updated and saved"
+                  factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+                  pathname="conf/tomcat-users.xml" />
+      </GlobalNamingResources>
 
-一个war包就是一个context
-一个host可以包含多个context
+      <Service name="Catalina">
+        <!--一个service可以有多个Connector-->
+        <Connector port="8080" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="8443" />
+    <!--一个service只能有一个Engine-->
+    <Engine name="Catalina" defaultHost="localhost">
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+    <!--一个Engine可以有多个Host，一个webapps就是一个Host,多个host的name不能一样-->
+     <!--一个Host可以有多个context，一个war包就是一个context-->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+      <Host name="www.baidu.com"  appBase="webapps2"
+            unpackWARs="true" autoDeploy="true">
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+      </Host>
+    </Engine>
+      </Service>
+    </Server>
+
+
 ## Welcome to Apache Tomcat!
 
 ### What Is It?
