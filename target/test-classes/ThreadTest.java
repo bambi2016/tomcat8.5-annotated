@@ -1,7 +1,9 @@
+import java.util.concurrent.TimeUnit;
+
 public class ThreadTest {
     public static void main(String[] args){
-        int LOCK_COUNT = Runtime.getRuntime().availableProcessors();
-        System.out.println(LOCK_COUNT);
+        TimeUnit seconds = TimeUnit.SECONDS;
+
     }
 
     private void func() {

@@ -26,6 +26,8 @@ import org.apache.catalina.Wrapper;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.buf.MessageBytes;
 import org.apache.tomcat.util.res.StringManager;
 
@@ -39,6 +41,7 @@ import org.apache.tomcat.util.res.StringManager;
  * @author Craig R. McClanahan
  */
 final class StandardContextValve extends ValveBase {
+    private static final Log log = LogFactory.getLog(StandardContextValve.class);
 
     private static final StringManager sm = StringManager.getManager(StandardContextValve.class);
 
@@ -93,6 +96,7 @@ final class StandardContextValve extends ValveBase {
         if (request.isAsyncSupported()) {
             request.setAsyncSupported(wrapper.getPipeline().isAsyncSupported());
         }
+        log.info("请求处理 StandardWrapper.getPipeline.invoke ");
         wrapper.getPipeline().getFirst().invoke(request, response);
     }
 }

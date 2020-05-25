@@ -1080,7 +1080,7 @@ public abstract class AbstractEndpoint<S> {
             }
             Executor executor = getExecutor();
             if (dispatch && executor != null) {
-                log.info("请求处理 将请求交给线程池处理");
+                log.info("请求处理 Executor.execute()将请求交给线程池处理 5");
                 executor.execute(sc);
             } else {
                 sc.run();
@@ -1210,7 +1210,7 @@ public abstract class AbstractEndpoint<S> {
             String threadName = getName() + "-Acceptor-" + i;
             acceptors[i].setThreadName(threadName);
             //启动流程 start11
-            log.info("启动流程 start11");
+            log.info("启动流程 start11开启两个Acceptor线程");
             Thread t = new Thread(acceptors[i], threadName);
             t.setPriority(getAcceptorThreadPriority());
             t.setDaemon(getDaemon());

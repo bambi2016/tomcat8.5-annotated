@@ -25,6 +25,8 @@ import org.apache.catalina.Host;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.res.StringManager;
 
 /**
@@ -37,6 +39,7 @@ import org.apache.tomcat.util.res.StringManager;
  * @author Craig R. McClanahan
  */
 final class StandardEngineValve extends ValveBase {
+    private static final Log log = LogFactory.getLog(StandardEngineValve.class);
 
     //------------------------------------------------------ Constructor
     public StandardEngineValve() {
@@ -84,6 +87,7 @@ final class StandardEngineValve extends ValveBase {
         }
 
         // Ask this Host to process this request
+        log.info("请求处理 StandardHost.getPipeline.invoke ");
         host.getPipeline().getFirst().invoke(request, response);
 
     }

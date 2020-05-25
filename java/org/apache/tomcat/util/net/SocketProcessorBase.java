@@ -50,7 +50,7 @@ public abstract class SocketProcessorBase<S> implements Runnable {
             if (socketWrapper.isClosed()) {
                 return;
             }
-            log.info("请求处理 线程池收到请求，进行处理");
+            log.info("请求处理 SocketProcessor的父接口SocketProcessorBase线程池收到请求，进行处理 6");
             doRun();
         }
     }

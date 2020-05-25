@@ -481,7 +481,7 @@ public class Http11Processor extends AbstractProcessor {
     @Override
     public SocketState service(SocketWrapperBase<?> socketWrapper)
         throws IOException {
-        log.info("请求处理 进行http解析，解析为Request Response");
+        log.info("请求处理 进行http解析，解析为Request Response 9");
         RequestInfo rp = request.getRequestProcessor();
         rp.setStage(org.apache.coyote.Constants.STAGE_PARSE);
 
@@ -499,6 +499,7 @@ public class Http11Processor extends AbstractProcessor {
                 sendfileState == SendfileState.DONE && !endpoint.isPaused()) {
 
             // Parsing the request header
+            log.info("解析请求头");
             try {
                 if (!inputBuffer.parseRequestLine(keptAlive)) {
                     if (inputBuffer.getParsingRequestLinePhase() == -1) {
@@ -613,7 +614,7 @@ public class Http11Processor extends AbstractProcessor {
             if (getErrorState().isIoAllowed()) {
                 try {
                     rp.setStage(org.apache.coyote.Constants.STAGE_SERVICE);
-                    log.info("请求处理 进入第三个类CoyoteAdapter.service");
+                    log.info("请求处理 进入第三个类CoyoteAdapter.service 10");
                     getAdapter().service(request, response);
                     // Handle when the response was committed before a serious
                     // error occurred.  Throwing a ServletException should both

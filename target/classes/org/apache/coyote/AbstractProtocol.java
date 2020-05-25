@@ -718,7 +718,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler,
 
         @Override
         public SocketState process(SocketWrapperBase<S> wrapper, SocketEvent status) {
-
+            log.info("疑问 这个方法的作用是什么");
             if (getLog().isDebugEnabled()) {
                 getLog().debug(sm.getString("abstractConnectionHandler.process",
                         wrapper.getSocket(), status));
@@ -820,6 +820,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler,
 
                 SocketState state = SocketState.CLOSED;
                 do {
+                    log.info("请求响应 进入解析http请求的方法");
                     state = processor.process(wrapper, status);
 
                     if (state == SocketState.UPGRADING) {

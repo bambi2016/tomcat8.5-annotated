@@ -395,10 +395,9 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
      * @return <code>true</code> if the socket was correctly configured
      *  and processing may continue, <code>false</code> if the socket needs to be
      *  close immediately
-     *  log.info("请求处理 交给对应的处理器处理");
      */
     protected boolean setSocketOptions(SocketChannel socket) {
-        log.info("请求处理 交给对应的处理器处理");
+        log.info("请求处理 交给对应的处理器处理 2");
         // Process the connection
         try {
             //disable blocking, APR style, we are gonna be polling it
@@ -489,7 +488,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                         ////启动流程 start最后一步
                         log.info("启动流程 start最后一步");
                         socket = serverSock.accept();
-                        log.info("请求处理 接收到请求");
+                        log.info("请求处理 接收到请求 1");
                     } catch (IOException ioe) {
                         // We didn't get a socket
                         countDownConnection();
@@ -863,7 +862,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                 while (iterator != null && iterator.hasNext()) {
                     //通过这里发现 tomcat一次同时可以接收两次请求 两个线程
                     String threadname = Thread.currentThread().getName();
-                    log.info("请求处理01 在这里无限循环，只要有请求，这里是第一个知道的。");
+                    log.info("请求处理01 Poller.run()最多两个线程在这里无限循环，只要有请求，这里是第一个知道的。 3");
                     log.info("线程名："+threadname);
 //                    try {
 //                        Thread.sleep(1000);
@@ -871,6 +870,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
 //                        e.printStackTrace();
 //                    }
                     SelectionKey sk = iterator.next();
+                    //疑问 NioSocketWrapper是什么意思
                     NioSocketWrapper attachment = (NioSocketWrapper)sk.attachment();
                     // Attachment may be null if another thread has called
                     // cancelledKey()
@@ -891,7 +891,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
         }
 
         protected void processKey(SelectionKey sk, NioSocketWrapper attachment) {
-            log.info("请求处理 processKey方法处理请求");
+            log.info("请求处理 processKey方法处理请求 4");
             try {
                 if ( close ) {
                     cancelledKey(sk);
@@ -1609,7 +1609,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                 //握手
                 int handshake = -1;
                 //请求处理 三次握手的过程
-                log.info("请求处理 三次握手的过程");
+                log.info("请求处理 验证socket握手状态 7");
                 try {
                     if (key != null) {
                         if (socket.isHandshakeComplete()) {
@@ -1645,7 +1645,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                     if (event == null) {
                         state = getHandler().process(socketWrapper, SocketEvent.OPEN_READ);
                     } else {
-                        log.info("请求处理 调用响应的handle进行处理");
+                        log.info("请求处理 调用相应的handle进行处理 8");
                         state = getHandler().process(socketWrapper, event);
                     }
                     if (state == SocketState.CLOSED) {

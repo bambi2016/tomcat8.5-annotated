@@ -37,6 +37,8 @@ import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
 import org.apache.coyote.CloseNowException;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.buf.MessageBytes;
 import org.apache.tomcat.util.log.SystemLogHandler;
@@ -50,6 +52,7 @@ import org.apache.tomcat.util.res.StringManager;
  */
 final class StandardWrapperValve
     extends ValveBase {
+    private static final Log log = LogFactory.getLog(StandardWrapperValve.class);
 
     //------------------------------------------------------ Constructor
     public StandardWrapperValve() {
@@ -131,6 +134,7 @@ final class StandardWrapperValve
         // Allocate a servlet instance to process this request
         try {
             if (!unavailable) {
+                log.info("请求处理 获取到servlet ");
                 servlet = wrapper.allocate();
             }
         } catch (UnavailableException e) {
@@ -169,6 +173,7 @@ final class StandardWrapperValve
         request.setAttribute(Globals.DISPATCHER_REQUEST_PATH_ATTR,
                 requestPathMB);
         // Create the filter chain for this request
+        log.info("请求处理 构造过滤器链");
         ApplicationFilterChain filterChain =
                 ApplicationFilterFactory.createFilterChain(request, wrapper, servlet);
 
@@ -183,6 +188,7 @@ final class StandardWrapperValve
                         if (request.isAsyncDispatching()) {
                             request.getAsyncContextInternal().doInternalDispatch();
                         } else {
+                            log.info("请求处理 执行过滤器链");
                             filterChain.doFilter(request.getRequest(),
                                     response.getResponse());
                         }

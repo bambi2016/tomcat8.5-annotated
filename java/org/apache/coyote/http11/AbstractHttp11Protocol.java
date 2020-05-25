@@ -64,7 +64,7 @@ public abstract class AbstractHttp11Protocol<S> extends AbstractProtocol<S> {
         getEndpoint().setHandler(cHandler);
     }
 
-    //启动流程 init
+
     @Override
     public void init() throws Exception {
         // Upgrade protocols have to be configured first since the endpoint
