@@ -40,7 +40,7 @@ VM options的值填：
       </GlobalNamingResources>
 
       <Service name="Catalina">
-        <!--一个service可以有多个Connector-->
+        <!--一个service可以有多个Connector  protected Connector connectors[] = new Connector[0];-->
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="8443" />
