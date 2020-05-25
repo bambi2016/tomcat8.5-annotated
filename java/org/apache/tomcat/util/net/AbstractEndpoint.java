@@ -1116,9 +1116,9 @@ public abstract class AbstractEndpoint<S> {
     public abstract void unbind() throws Exception;
     public abstract void startInternal() throws Exception;
     public abstract void stopInternal() throws Exception;
-//启动流程 init11
+    //启动流程 init11
     public void init() throws Exception {
-        log.info("启动流程 init11");
+        log.info("启动流程 AbstractEndpoint#init11");
         if (bindOnInit) {
             bind();
             bindState = BindState.BOUND_ON_INIT;

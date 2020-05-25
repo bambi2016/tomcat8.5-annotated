@@ -212,7 +212,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     @Override
     public void addConnector(Connector connector) {
-
+        //一个service可以有多个Connector
         synchronized (connectorsLock) {
             connector.setService(this);
             Connector results[] = new Connector[connectors.length + 1];
@@ -419,12 +419,13 @@ public class StandardService extends LifecycleMBeanBase implements Service {
         // Start our defined Container first
         if (engine != null) {
             synchronized (engine) {
+                log.info("启动流程 调用engine.start() 方法");
                 engine.start();
             }
         }
-
         synchronized (executors) {
             for (Executor executor: executors) {
+                log.info("启动流程 调用executor.start();方法");
                 executor.start();
             }
         }
@@ -432,13 +433,13 @@ public class StandardService extends LifecycleMBeanBase implements Service {
         mapperListener.start();
 
         // Start our defined Connectors second
+
         synchronized (connectorsLock) {
             for (Connector connector: connectors) {
                 try {
                     // If it has already failed, don't try and start it
                     if (connector.getState() != LifecycleState.FAILED) {
-                        //启动流程 start6
-                        log.info("启动流程 start6");
+                        log.info("启动流程 调用connector.start();方法");
                         connector.start();
                     }
                 } catch (Exception e) {
@@ -553,7 +554,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
             for (Connector connector : connectors) {
                 try {
                     //启动流程 init6
-                    log.info("启动流程 init6");
+                    log.info("启动流程 多个connector.init6");
                     connector.init();
                 } catch (Exception e) {
                     String message = sm.getString(

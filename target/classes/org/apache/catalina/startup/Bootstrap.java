@@ -16,17 +16,18 @@
  */
 package org.apache.catalina.startup;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.Globals;
 import org.apache.catalina.security.SecurityClassLoad;
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
@@ -273,7 +274,7 @@ public final class Bootstrap {
         Method method =
             startupInstance.getClass().getMethod(methodName, paramTypes);
         method.invoke(startupInstance, paramValues);
-
+        log.info("启动流程 创建Catalina成功");
         catalinaDaemon = startupInstance;
     }
 
@@ -302,7 +303,7 @@ public final class Bootstrap {
             log.debug("Calling startup class " + method);
         }
         //启动流程 init2
-        log.info("启动流程 init2");
+        log.info("启动流程 调用 Catalina#load方法");
         method.invoke(catalinaDaemon, param);
     }
 
@@ -344,7 +345,8 @@ public final class Bootstrap {
 
         Method method = catalinaDaemon.getClass().getMethod("start", (Class [])null);
         //启动流程 start2
-        log.info("启动流程 start2");
+        log.info("启动流程 Catalina#start2");
+
         method.invoke(catalinaDaemon, (Object [])null);
     }
 
@@ -480,6 +482,7 @@ public final class Bootstrap {
                 daemon.load(args);
                 //启动流程 start1
                 log.info("启动流程 start1");
+
                 daemon.start();
                 if (null == daemon.getServer()) {
                     System.exit(1);

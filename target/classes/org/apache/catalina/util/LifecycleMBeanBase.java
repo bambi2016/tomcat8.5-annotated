@@ -34,7 +34,7 @@ import org.apache.tomcat.util.res.StringManager;
 public abstract class LifecycleMBeanBase extends LifecycleBase
         implements JmxEnabled {
 
-    private static final Log log = LogFactory.getLog(LifecycleMBeanBase.class);
+    protected static final Log log = LogFactory.getLog(LifecycleMBeanBase.class);
 
     private static final StringManager sm =
         StringManager.getManager("org.apache.catalina.util");

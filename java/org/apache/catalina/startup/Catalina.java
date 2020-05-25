@@ -176,6 +176,7 @@ public class Catalina {
     }
 
     public void setServer(Server server) {
+        log.info("通过反射初始化 server");
         this.server = server;
     }
 
@@ -527,7 +528,7 @@ public class Catalina {
 
     /**
      * Start a new server instance.
-     * //启动流程 init
+     *
      */
     public void load() {
 
@@ -544,7 +545,7 @@ public class Catalina {
         initNaming();
 
         // Create and execute our Digester
-        log.info("解析tomcat xml配置文件");
+        log.info("启动流程 解析tomcat 核心配置文件server.xml");
         Digester digester = createStartDigester();
 
         InputSource inputSource = null;
@@ -610,6 +611,7 @@ public class Catalina {
             try {
                 inputSource.setByteStream(inputStream);
                 digester.push(this);
+                log.info("启动流程 初始化 StandardServer 类");
                 digester.parse(inputSource);
             } catch (SAXParseException spe) {
                 log.warn("Catalina.start using " + getConfigFile() + ": " +

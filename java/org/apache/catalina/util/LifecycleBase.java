@@ -136,7 +136,7 @@ public abstract class LifecycleBase implements Lifecycle {
             //修改state状态 INITIALIZING
             setStateInternal(LifecycleState.INITIALIZING, null, false);
             //启动流程 init4
-            log.info("启动流程 init4模版方法设计模式，initInternal在多个类中都有实现");
+            log.info("启动流程 init4模版方法模式");
             initInternal();
             //修改state状态为 INITIALIZED
             setStateInternal(LifecycleState.INITIALIZED, null, false);

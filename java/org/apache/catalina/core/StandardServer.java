@@ -849,7 +849,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
         // Initialize our defined Services
         for (int i = 0; i < services.length; i++) {
             //启动流程 init5
-            log.info("启动流程 init5");
+            log.info("启动流程 初始化多个service init5");
             services[i].init();
         }
     }

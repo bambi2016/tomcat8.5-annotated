@@ -214,7 +214,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
      */
     @Override
     public void bind() throws Exception {
-        log.info("启动流程 init12");
+        log.info("启动流程 tcp服务器绑定init12 ");
         if (!getUseInheritedChannel()) {
             serverSock = ServerSocketChannel.open();
             socketProperties.setProperties(serverSock.socket());
@@ -1601,7 +1601,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
 
         @Override
         protected void doRun() {
-            log.info("请求处理 n");
+            log.info("请求处理 tcp连接过程");
             NioChannel socket = socketWrapper.getSocket();
             SelectionKey key = socket.getIOChannel().keyFor(socket.getPoller().getSelector());
 

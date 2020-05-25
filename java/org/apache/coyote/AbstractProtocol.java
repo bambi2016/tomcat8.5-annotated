@@ -586,7 +586,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler,
         endpoint.setName(endpointName.substring(1, endpointName.length()-1));
         endpoint.setDomain(domain);
 //启动流程 init9
-        log.info("启动流程 init9");
+        log.info("启动流程 endpoint#init9");
         endpoint.init();
     }
 

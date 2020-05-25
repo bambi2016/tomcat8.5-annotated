@@ -992,13 +992,14 @@ public class Connector extends LifecycleMBeanBase  {
         }
     }
 
-    //启动流程 init
+    //
     @Override
     protected void initInternal() throws LifecycleException {
 
         super.initInternal();
 
         // Initialize adapter
+        log.info("启动流程 初始化Coyote连接器 init");
         adapter = new CoyoteAdapter(this);
         protocolHandler.setAdapter(adapter);
 
@@ -1028,7 +1029,7 @@ public class Connector extends LifecycleMBeanBase  {
 
         try {
             //启动流程 init7
-            log.info("启动流程 init7");
+            log.info("启动流程 protocolHandler 7");
             protocolHandler.init();
         } catch (Exception e) {
             throw new LifecycleException(
