@@ -20,7 +20,7 @@ VM options的值填：
 
 5:访问localhost:8080
 ![图片](https://github.com/bambi2016/tomcat8.5-annotated/blob/master/image/1590418999326.jpg)
-![Tomcat架构解析(一)-----Tomcat总体架构](https://www.cnblogs.com/alimayun/p/10604532.html)
+[![Tomcat架构解析(一)-----Tomcat总体架构]](https://www.cnblogs.com/alimayun/p/10604532.html)
 
 
     <?xml version="1.0" encoding="UTF-8"?>
