@@ -112,6 +112,8 @@ public class NioReceiver extends ReceiverBase implements Runnable, NioReceiverMB
 
 
     protected void bind() throws IOException {
+        log.info("这个代码不走啊");
+
         // allocate an unbound server socket channel
         serverChannel = ServerSocketChannel.open();
         // Get the associated ServerSocket to bind it with
@@ -264,6 +266,7 @@ public class NioReceiver extends ReceiverBase implements Runnable, NioReceiverMB
             try {
                 events();
                 socketTimeouts();
+                log.info("selector.select(getSelectorTimeout());");
                 int n = selector.select(getSelectorTimeout());
                 if (n == 0) {
                     //there is a good chance that we got here
@@ -285,6 +288,7 @@ public class NioReceiver extends ReceiverBase implements Runnable, NioReceiverMB
                     SelectionKey key = it.next();
                     // Is a new connection coming in?
                     if (key.isAcceptable()) {
+                        log.info("可连接事件");
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel channel = server.accept();
                         channel.socket().setReceiveBufferSize(getRxBufSize());

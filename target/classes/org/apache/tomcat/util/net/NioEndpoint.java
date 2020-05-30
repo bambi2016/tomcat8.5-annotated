@@ -402,6 +402,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
         try {
             //disable blocking, APR style, we are gonna be polling it
             socket.configureBlocking(false);
+            log.info("socket.socket();");
             Socket sock = socket.socket();
             socketProperties.setProperties(sock);
 
@@ -486,9 +487,9 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                         // Accept the next incoming connection from the server
                         // socket
                         ////启动流程 start最后一步
-                        log.info("启动流程 start最后一步");
+                        log.info("启动流程 start最后一步 serverSock.accept()");
                         socket = serverSock.accept();
-                        log.info("请求处理 接收到请求 1");
+                        log.info("请求处理 收到连接请求 1");
                     } catch (IOException ioe) {
                         // We didn't get a socket
                         countDownConnection();
@@ -509,6 +510,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                         // setSocketOptions() will hand the socket off to
                         // an appropriate processor if successful
                         //请求处理 方法 setSocketOptions
+                        log.info("下一步 setSocketOptions");
                         if (!setSocketOptions(socket)) {
                             closeSocket(socket);
                         }
@@ -831,8 +833,10 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                         if (wakeupCounter.getAndSet(-1) > 0) {
                             //if we are here, means we have other stuff to do
                             //do a non blocking select
+                            System.out.println("实时刷新");
                             keyCount = selector.selectNow();
                         } else {
+//                            System.out.println("一秒select一次");
                             keyCount = selector.select(selectorTimeout);
                         }
                         wakeupCounter.set(0);
@@ -854,7 +858,6 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                 }
                 //either we timed out or we woke up, process events first
                 if ( keyCount == 0 ) hasEvents = (hasEvents | events());
-
                 Iterator<SelectionKey> iterator =
                     keyCount > 0 ? selector.selectedKeys().iterator() : null;
                 // Walk through the collection of ready keys and dispatch
@@ -904,12 +907,14 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
                             boolean closeSocket = false;
                             // Read goes before write
                             if (sk.isReadable()) {
+                                log.info("可读事件");
                                 log.info("processSocket方法处理");
                                 if (!processSocket(attachment, SocketEvent.OPEN_READ, true)) {
                                     closeSocket = true;
                                 }
                             }
                             if (!closeSocket && sk.isWritable()) {
+                                log.info("可写事件");
                                 if (!processSocket(attachment, SocketEvent.OPEN_WRITE, true)) {
                                     closeSocket = true;
                                 }

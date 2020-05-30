@@ -182,6 +182,7 @@ public class NioSelectorPool {
                     if (writeTimeout==0) {
                         timedout = buf.hasRemaining();
                     } else if (writeTimeout<0) {
+                        log.info("selector.select;阻塞方法");
                         keycount = selector.select();
                     } else {
                         keycount = selector.select(writeTimeout);
@@ -261,6 +262,7 @@ public class NioSelectorPool {
                     if (readTimeout==0) {
                         timedout = (read==0);
                     } else if (readTimeout<0) {
+                        log.info("selector.select();阻塞方法");
                         keycount = selector.select();
                     } else {
                         keycount = selector.select(readTimeout);

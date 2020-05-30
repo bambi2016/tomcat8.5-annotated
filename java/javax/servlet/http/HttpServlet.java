@@ -625,7 +625,12 @@ public abstract class HttpServlet extends GenericServlet {
         throws ServletException, IOException {
 
         String method = req.getMethod();
-
+        System.out.println("睡眠10秒");
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         if (method.equals(METHOD_GET)) {
             long lastModified = getLastModified(req);
             if (lastModified == -1) {
